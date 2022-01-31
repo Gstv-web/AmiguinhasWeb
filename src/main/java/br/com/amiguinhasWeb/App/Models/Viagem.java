@@ -1,9 +1,8 @@
 package br.com.amiguinhasWeb.App.Models;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_viagens")
@@ -20,27 +19,27 @@ public class Viagem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idViagem;
 	
 	@NotBlank
 	private String destino;
 	
 	@NotBlank
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataViagem;
 	
 	@NotBlank
 	private int quantidadeMaxPessoas;
+
+	@OneToMany(mappedBy = "viagem")
+	Set<Excursao> parcelas;
 	
-	@OneToMany(mappedBy = "viagem", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("viagem")
-	private List<Cliente> cliente;
 	
-	
-	public long getId() {
-		return id;
+	public long getIdViagem() {
+		return idViagem;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setIdViagem(long idViagem) {
+		this.idViagem = idViagem;
 	}
 	public String getDestino() {
 		return destino;
@@ -60,7 +59,5 @@ public class Viagem {
 	public void setQuantidadeMaxPessoas(int quantidadeMaxPessoas) {
 		this.quantidadeMaxPessoas = quantidadeMaxPessoas;
 	}
-	
-	
 	
 }

@@ -1,26 +1,30 @@
 package br.com.amiguinhasWeb.App.Models;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
-@Table("tb_cliente")
+@Table(name = "tb_cliente")
 public class Cliente {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long idCliente;
 	
 	@NotBlank
 	@Size(min = 3)
@@ -32,7 +36,6 @@ public class Cliente {
 	@NotNull
 	private String orgEmissor;
 	
-	
 	@NotBlank
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
@@ -40,16 +43,16 @@ public class Cliente {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro = new java.sql.Date(System.currentTimeMillis());
 	
-	@ManyToOne
-	@JsonIgnoreProperties("Cliente")
-	private Viagem viagem;
+	@OneToMany(mappedBy = "cliente")
+	Set<Excursao> parcelas;
 
-	public long getId() {
-		return id;
+
+	public long getIdCliente() {
+		return idCliente;
 	}
 	
-	public void setId(long id) {
-		this.id = id;
+	public void setIdCliente(long idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getNome() {
@@ -92,11 +95,4 @@ public class Cliente {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Viagem getViagem() {
-		return viagem;
-	}
-
-	public void setViagem(Viagem viagem) {
-		this.viagem = viagem;
-	} 
 }
