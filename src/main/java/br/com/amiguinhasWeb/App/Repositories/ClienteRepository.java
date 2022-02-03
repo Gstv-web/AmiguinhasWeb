@@ -11,4 +11,8 @@ import br.com.amiguinhasWeb.App.Models.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
  
     public List<Cliente> findAllByNomeContainingIgnoreCase (String nome);
+
+    public List<Cliente> findByNome (String nome);
+
+    public List<Cliente> findByDocument (String documento);
 }
