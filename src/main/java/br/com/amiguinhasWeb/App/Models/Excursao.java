@@ -1,9 +1,7 @@
 package br.com.amiguinhasWeb.App.Models;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -13,17 +11,16 @@ import javax.validation.constraints.NotNull;
 @Table(name = "tb_excursao")
 public class Excursao {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idExcursao;
+    @EmbeddedId
+    ExcursaoEmb idExcursao;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    Cliente cliente;
+    private Cliente fkCliente;
     
     @ManyToOne
     @JoinColumn(name = "id_viagem")
-    Viagem viagem;
+    private Viagem fkViagem;
 
     @NotNull
     private boolean primeiraParcela;
@@ -34,28 +31,29 @@ public class Excursao {
     private boolean terceiraParcela;
 
 
-    public long getIdExcursao() {
+
+    public ExcursaoEmb getIdExcursao() {
         return this.idExcursao;
     }
 
-    public void setIdExcursao(long idExcursao) {
+    public void setIdExcursao(ExcursaoEmb idExcursao) {
         this.idExcursao = idExcursao;
     }
 
-    public Cliente getCliente() {
-        return this.cliente;
+    public Cliente getFkCliente() {
+        return this.fkCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setFkCliente(Cliente fkCliente) {
+        this.fkCliente = fkCliente;
     }
 
-    public Viagem getViagem() {
-        return this.viagem;
+    public Viagem getFkViagem() {
+        return this.fkViagem;
     }
 
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
+    public void setFkViagem(Viagem fkViagem) {
+        this.fkViagem = fkViagem;
     }
 
     public boolean isPrimeiraParcela() {
@@ -93,5 +91,5 @@ public class Excursao {
     public void setTerceiraParcela(boolean terceiraParcela) {
         this.terceiraParcela = terceiraParcela;
     }
-
+    
 }

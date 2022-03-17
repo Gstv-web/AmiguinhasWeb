@@ -13,7 +13,7 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private long userId;
 
     @NotBlank
     private String email;
@@ -22,23 +22,22 @@ public class User {
     private String senha;
 
 
-    public User(String id, String email, String senha) {
-        this.id = id;
+    public User(long userId, String email, String senha) {
+        this.userId = userId;
         this.email = email;
         this.senha = senha;
     }
 
 
-    public User() {
+    public User() {}
+
+
+    public long getUserId() {
+        return this.userId;
     }
 
-
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {

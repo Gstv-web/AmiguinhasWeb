@@ -43,8 +43,8 @@ public class Cliente {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro = new java.sql.Date(System.currentTimeMillis());
 	
-	@OneToMany(mappedBy = "cliente")
-	Set<Excursao> parcelas;
+	@OneToMany(mappedBy = "fkCliente")
+	Set<Excursao> excursao;
 
 
 	public long getIdCliente() {

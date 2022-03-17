@@ -1,19 +1,27 @@
-package br.com.amiguinhasWeb.App.Models;
+package br.com.amiguinhasWeb.App.DTO;
 
-public class UserLogin {
-
-    private String id;
+public class UserDTO {
+    
+    private String userId;
     private String email;
     private String senha;
-    private String token;
 
+    // Constructors
+    public UserDTO(String userId, String email, String senha) {
+        this.userId = userId;
+        this.email = email;
+        this.senha = senha;
+    }
 
+    public UserDTO() {}
+
+    // Getters & Setters
     public String getId() {
-        return this.id;
+        return this.userId;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getEmail() {
@@ -31,14 +39,5 @@ public class UserLogin {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getToken() {
-        return this.token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
 
 }

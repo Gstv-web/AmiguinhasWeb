@@ -31,8 +31,8 @@ public class Viagem {
 	@NotBlank
 	private int quantidadeMaxPessoas;
 
-	@OneToMany(mappedBy = "viagem")
-	Set<Excursao> parcelas;
+	@OneToMany(mappedBy = "fkViagem")
+	private Set<Excursao> excursao;
 	
 	
 	public long getIdViagem() {
